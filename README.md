@@ -7,3 +7,6 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/Ahsan6765/azure-vm-terraform-infra.git
 git push -u origin main
+
+
+C:\Users\admin\.ssh\id_rsa.pub

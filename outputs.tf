@@ -5,12 +5,14 @@ output "resource_group_name" {
 
 output "vnet_name" {
   description = "The name of the Virtual Network"
-  value       = module.network.vnet_name
+  # value       = module.network.vnet_name
+value = module.network.vnet_id
 }
 
 output "subnet_id" {
   description = "The ID of the Subnet"
-  value       = module.network.subnet_id
+  # value       = module.network.subnet_id
+value = module.network.subnet_ids[0]
 }
 
 output "public_ip_address" {
@@ -20,10 +22,10 @@ output "public_ip_address" {
 
 output "vm_name" {
   description = "The name of the VM"
-  value       = module.vm.vm_name
+  value       = module.linux_vm.vm_name
 }
 
 output "vm_private_ip" {
   description = "The private IP of the VM"
-  value       = module.vm.vm_private_ip
+  value       = module.linux_vm.vm_private_ip
 }

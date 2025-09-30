@@ -72,3 +72,9 @@ variable "admin_password" {
   sensitive   = true
   description = "Admin password for the VM"
 }
+
+# SSH Public Key Path for Linux VM
+variable "ssh_public_key_path" {
+  type        = string
+  description = "Path to the SSH public key file for the Linux VM."
+}
