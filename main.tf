@@ -47,19 +47,18 @@ module "nic" {
   location            = module.resource_group.location
   resource_group_name = module.resource_group.name
   subnet_id           = values(module.network.subnet_ids)[0]
-  # public_ip_id        = module.public_ip.public_ip_id
-  public_ip_id = module.public_ip.id
+  public_ip_id        = module.public_ip.id
   tags                = var.tags
 }
 # Linux Virtual Machine
 module "linux_vm" {
-  source                = "./modules/linux_vm"
-  name                  = var.vm_name
-  location              = module.resource_group.location
-  resource_group_name   = module.resource_group.name
-  network_interface_id  = module.nic.id
-  admin_username        = var.admin_username
-  ssh_public_key_path   = var.ssh_public_key_path
-  vm_size               = var.vm_size
-  tags                  = var.tags
+  source               = "./modules/linux_vm"
+  name                 = var.vm_name
+  location             = module.resource_group.location
+  resource_group_name  = module.resource_group.name
+  network_interface_id = module.nic.id
+  admin_username       = var.admin_username
+  ssh_public_key_path  = var.ssh_public_key_path
+  vm_size              = var.vm_size
+  tags                 = var.tags
 }
