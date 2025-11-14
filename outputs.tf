@@ -16,15 +16,15 @@ output "subnet_id" {
 
 output "public_ip_address" {
   description = "The public IP address of the VM"
-  value       = module.public_ip.ip_address
+  value       = [for p in values(module.public_ip) : p.ip_address]
 }
 
-output "vm_name" {
-  description = "The name of the VM"
-  value       = module.linux_vm.vm_name
+output "vm_names" {
+  description = "List of VM names"
+  value       = [for m in values(module.linux_vm) : m.vm_name]
 }
 
-output "vm_private_ip" {
-  description = "The private IP of the VM"
-  value       = module.linux_vm.vm_private_ip
+output "vm_private_ips" {
+  description = "List of private IPs for VMs"
+  value       = [for m in values(module.linux_vm) : m.vm_private_ip]
 }

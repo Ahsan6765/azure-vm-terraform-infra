@@ -56,6 +56,13 @@ variable "vm_name" {
   description = "Name of the Virtual Machine"
 }
 
+# Names for multiple VMs (master + workers)
+variable "vm_names" {
+  type        = list(string)
+  description = "List of VM names to create (e.g. [\"kmaster\", \"kworker1\", \"kworker2\"])"
+  default     = ["kmaster", "kworker1", "kworker2"]
+}
+
 variable "vm_size" {
   type        = string
   default     = "Standard_B1s"
