@@ -17,3 +17,7 @@ terraform.tfvars
 # OS-specific
 .DS_Store
 Thumbs.db
+
+
+# - Preserve LF endings
+*.sh text eol=lf

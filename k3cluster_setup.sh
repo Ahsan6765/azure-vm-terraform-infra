@@ -1,3 +1,5 @@
+follow these
+
 Step 1: Get the K3s Token from the Master Node
 sudo cat /var/lib/rancher/k3s/server/node-token
 Copy this token — you'll need it on the worker nodes.
