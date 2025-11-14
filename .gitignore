@@ -4,7 +4,7 @@
 *.tfstate.*
 crash.log
 *.log
-
+.terraform.lock.hcl
 # Sensitive files
 terraform.tfvars
 *.auto.tfvars
