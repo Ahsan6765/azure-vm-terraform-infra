@@ -19,15 +19,14 @@ module "network" {
   tags                = var.tags
 }
 
-# Public IPs (one per VM)
+# Public IP
 module "public_ip" {
-  for_each            = toset(var.vm_names)
   source              = "./modules/public_ip"
-  name                = "${each.value}-pip"
+  name                = var.public_ip_name
   location            = module.resource_group.location
   resource_group_name = module.resource_group.name
   allocation_method   = "Static"
-  tags                = merge(var.tags, { Name = "${each.value}-pip", Role = each.value == "kmaster" ? "master" : "worker" })
+  tags                = var.tags
 }
 
 # Network Security Group (associated with subnets from network module)
@@ -41,27 +40,25 @@ module "nsg" {
   subnet_ids = module.network.subnet_ids
 }
 
-# Network Interfaces (one per VM)
+# Network Interface
 module "nic" {
-  for_each            = toset(var.vm_names)
   source              = "./modules/nic"
-  name                = "${each.value}-nic"
+  name                = var.nic_name
   location            = module.resource_group.location
   resource_group_name = module.resource_group.name
   subnet_id           = module.network.subnet_ids[0]
-  public_ip_id        = module.public_ip[each.value].id
-  tags                = merge(var.tags, { Name = "${each.value}-nic", Role = each.value == "kmaster" ? "master" : "worker" })
+  public_ip_id        = module.public_ip.id
+  tags                = var.tags
 }
-# Linux Virtual Machines (master + workers)
+# Linux Virtual Machine
 module "linux_vm" {
-  for_each             = toset(var.vm_names)
   source               = "./modules/linux_vm"
-  name                 = each.value
+  name                 = var.vm_name
   location             = module.resource_group.location
   resource_group_name  = module.resource_group.name
-  network_interface_id = module.nic[each.value].id
+  network_interface_id = module.nic.id
   admin_username       = var.admin_username
   ssh_public_key_path  = var.ssh_public_key_path
   vm_size              = var.vm_size
-  tags                 = merge(var.tags, { Name = each.value, Role = each.value == "kmaster" ? "master" : "worker" })
+  tags                 = var.tags
 }
