@@ -26,8 +26,5 @@ resource "azurerm_linux_virtual_machine" "vm" {
     version   = "latest"
   }
 
-  # this is to install docker on the VM at creation time
-  custom_data = filebase64("${path.module}/cloud-init-docker.yml")
-
   tags = var.tags
 }

@@ -1,5 +1,8 @@
 # Terraform directories
 .terraform/
+**/.terraform/
+.terraform.backup/
+**/.terraform.backup/
 *.tfstate
 *.tfstate.*
 crash.log
